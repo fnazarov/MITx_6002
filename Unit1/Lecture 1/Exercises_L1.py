@@ -111,3 +111,56 @@ for numItems in (5, 10, 15, 20, 25, 30, 35, 40, 45):
     print('Try a menu with', numItems, 'items')
     items = buildLargeMenu(numItems, 90, 250)
     testMaxVal(items, 750, False)
+
+
+def fib(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return fib ( n - 1 ) + fib ( n - 2 )
+
+
+# for i in range(121):
+#    print('fib(' + str(i) + ') =', fib(i))
+
+
+def fastFib(n,memo={}):
+    """Assumes n is an int >= 0, memo used only by recursive calls
+       Returns Fibonacci of n"""
+    if n == 0 or n == 1:
+        return 1
+    try:
+        return memo[ n ]
+    except KeyError:
+        result = fastFib ( n - 1,memo ) + fastFib ( n - 2,memo )
+        memo[ n ] = result
+        return result
+
+
+for i in range ( 121 ):
+    print ( 'fib(' + str ( i ) + ') =',fastFib ( i ) )
+
+
+def genFib():
+    fib1 = 1  # fib(n-1)
+    fib2 = 0  # fib(n-2)
+
+    while True:
+        # fib(n) = fib(n-1) + fib(n-2)
+        next = fib1 + fib2
+        yield next
+        fib2 = fib1
+        fib1 = next
+
+
+# generate all combinations of N items
+def powerSet(items):
+    N = len ( items )
+    # enumerate the 2**N possible combinations
+    for i in range ( 2 ** N ):
+        combo = [ ]
+        for j in range ( N ):
+            # test bit jth of integer i
+            if (i >> j) % 2 == 1:
+                combo.append ( items[ j ] )
+        yield combo
