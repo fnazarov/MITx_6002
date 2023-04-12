@@ -63,4 +63,51 @@ values = [89,90,95,100,90,79,50,10]
 calories = [123,154,258,354,365,150,95,195]
 foods = buildMenu(names, values, calories)
 
-testGreedies(foods, 750)
+def maxVal(toConsider, avail):
+    """Assumes toConsider a list of items, avail a weight
+       Returns a tuple of the total weight of a solution to the
+         0/1 knapsack problem and the items of that solution"""
+    if toConsider == [] or avail ==[]:
+        result = (0, [])
+    elif toConsider[0].getCost() > avail:
+        #Explore the right branche only
+        result = maxVal(toConsider[1:], avail)
+    else:
+        nextItem = toConsider[0]
+        #Explore left branch
+        withVal, withToTake = maxVal(toConsider[1:], avail - nextItem.getCost())
+        withVal += nextItem.getValue()
+
+        #Explore right branch
+
+        withoutVal, withoutToTake = maxVal(toConsider[1:], avail)
+
+        #Choose better branch
+        if withVal> withoutVal:
+            result = (withVal, withToTake + (nextItem,))
+        else:
+            result = (withoutVal, withoutToTake)
+    return result
+
+def testMaxVal(foods, maxUnits, printItems = True):
+
+    print("Use SEARCH TREE to allocate: ", maxUnits, ' calories')
+
+    val, taken = maxVal(foods, maxUnits)
+
+    print('Total VALUE of items taken = ', val)
+    if printItems:
+        for item in taken:
+            print( '  ', item)
+def buildLargeMenu(numItems, maxVal, maxCost):
+    items = []
+    for i in range(numItems):
+        items.append(Food(str(i),
+                          random.randint(1, maxVal),
+                          random.randint(1, maxCost)))
+    return items
+import random
+for numItems in (5, 10, 15, 20, 25, 30, 35, 40, 45):
+    print('Try a menu with', numItems, 'items')
+    items = buildLargeMenu(numItems, 90, 250)
+    testMaxVal(items, 750, False)
