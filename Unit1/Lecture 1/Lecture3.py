@@ -106,7 +106,7 @@ def DFS(graph, start, end, path, shortest, to_print = False):
                     shortest = new_path
     return shortest
 def BFS (graph, start, end, to_print = False):
-    """Assumes graph is a Digraph; start and end are nodes. Returns a shortes path from start to end in graph"""
+    """Assumes graph is a Digraph; start and end are nodes. Returns a shortest path from start to end in graph"""
     init_path = [start]
     path_queue = [init_path]
     while len(path_queue) != 0:
