@@ -55,3 +55,17 @@ def throwNeedles(numNeedles):
             success += 1
     sqrt2 = 1+(float(success)/numNeedles)
     return sqrt2
+
+def throwNeedles(numNeedles):
+    """
+    Simulating Buffon-Laplace Method
+    :param numNeedles: num of Simulations
+    :return: Eprpximation of pi
+    """
+    inCircle = 0
+    for Needles in range(1, numNeedles+1,1):
+        x = random.random()
+        y= random.random()
+        if (x*x + y*y)**0.5 <= 1.0:
+            inCircle +=1
+        return 4*(inCircle/float(numNeedles))
