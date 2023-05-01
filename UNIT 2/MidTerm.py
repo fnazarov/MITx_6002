@@ -7,3 +7,13 @@ def max_sequence(arr):
         max_so_far = max(max_so_far, max_ending_here)
         print('Max so far is: ', max_so_far)
     return max_so_far
+
+
+def solveit(test):
+    for x in range(1000000):
+        if test(x):
+
+            return x
+        elif test(-x):
+
+            return -x
