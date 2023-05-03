@@ -78,3 +78,27 @@ def getEst(numNeedles, numTrials):
     stdDev = stdDev(estimates)
     curEst = sum(estimates)/len(estimates)
     print('Est. = ' + str(curEst) + ', Std.dev =' + str(round()))
+
+def noReplacementSimulation(numTrials):
+    '''
+    Runs numTrials trials of a Monte Carlo simulation
+    of drawing 3 balls out of a bucket containing
+    3 red and 3 green balls. Balls are not replaced once
+    drawn. Returns the a decimal - the fraction of times 3
+    balls of the same color were drawn.
+    '''
+    balls = ['r','r','r','g','g','g']
+    choosen = []
+    three_balls = []
+    for trial in range(numTrials):
+        for c in range(3):
+            b=random.choice(balls)
+            three_balls.append(b)
+            balls.remove(b)
+        if three_balls.count('r')==3 or three_balls.count('g')==3:
+            choosen.append(1)
+        else:
+            choosen.append(0)
+        three_balls = []
+        balls = ['r','r','r','g','g','g']
+    return sum(choosen)/numTrials
