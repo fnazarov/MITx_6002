@@ -56,7 +56,7 @@ def throwNeedles(numNeedles):
     sqrt2 = 1+(float(success)/numNeedles)
     return sqrt2
 
-def throwNeedles(numNeedles):
+def throwNeedlesPI(numNeedles):
     """
     Simulating Buffon-Laplace Method
     :param numNeedles: num of Simulations
@@ -69,3 +69,12 @@ def throwNeedles(numNeedles):
         if (x*x + y*y)**0.5 <= 1.0:
             inCircle +=1
         return 4*(inCircle/float(numNeedles))
+
+def getEst(numNeedles, numTrials):
+    estimates = []
+    for t in range(numTrials):
+        piGuess = throwNeedlesPI(numNeedles):
+        estimates.append(piGuess)
+    stdDev = stdDev(estimates)
+    curEst = sum(estimates)/len(estimates)
+    print('Est. = ' + str(curEst) + ', Std.dev =' + str(round()))
