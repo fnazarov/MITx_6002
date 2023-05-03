@@ -16,3 +16,8 @@ def plot_means(num_dice_per_trial, num_dice_thrown, num_bins,
     return sum(means)/len(means), np.var(means)
 
 mean, var = plot_means(1,10000, 11, '1 die','y','.')
+mean, var = plot_means(100,10000, 11, '1 die','c','/')
+plt.title('Rolling Continous Dice')
+plt.xlabel('Value')
+plt.ylabel('Probability')
+plt.legend(loc = 'upper left')
